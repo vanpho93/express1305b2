@@ -13,7 +13,7 @@ app.get('/admin', (req, res) => res.render('admin', { isAdmin: false }));
 
 app.get('/show/:index', (req, res) => {
     const { index } = req.params;
-    res.render('show', { hotGirl: arrHotGirl[index] });
+    res.render('show', { hotGirl: arrHotGirl[index], index });
 });
 
 app.listen(3000);
