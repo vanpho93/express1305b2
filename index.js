@@ -16,4 +16,4 @@ app.get('/show/:index', (req, res) => {
     res.render('show', { hotGirl: arrHotGirl[index], index });
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);

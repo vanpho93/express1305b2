@@ -5,6 +5,9 @@
   "repository": "https://github.com/vanpho93/express1305b2.git",
   "author": "Van Pho Nguyen <vanpho02@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "ejs": "^2.5.6",
     "express": "^4.15.3"
