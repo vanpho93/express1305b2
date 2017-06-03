@@ -20,6 +20,7 @@ app.get('/admin', (req, res) => res.render('admin'));
 app.get('/show/:id', (req, res) => {
     const { id } = req.params;
     getGirlById(id, (err, girl) => {
+        if (err) return res.send(err.toString());
         res.render('show', { hotGirl: girl, index: id });
     });
 });

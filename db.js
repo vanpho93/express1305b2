@@ -42,6 +42,7 @@ function getGirlById(id, cb) {
     const sql = 'SELECT * FROM "HotGirl" WHERE id = ' + id;
     queryDB(sql, (err, result) => {
         if (err) return cb(err);
+        if (!result.rows[0]) return cb(new Error('Duong dan khong ton tai'));
         cb(null, result.rows[0]);
     });
 }
