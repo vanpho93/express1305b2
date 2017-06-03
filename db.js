@@ -50,3 +50,4 @@ function queryDB(sql, cb) {
 // queryDB('SELECT * FROM "HotGirl"', onSuccess);
 
 // queryDB('SELECT * FROM "HotGirl"', arrowSuccess);
+module.exports = queryDB;
