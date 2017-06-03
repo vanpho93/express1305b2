@@ -1,5 +1,6 @@
 const express = require('express');
-const parser = require('body-parser').urlencoded({ extended: false });
+// const parser = require('body-parser').urlencoded({ extended: false });
+const upload = require('./uploadConfig');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -15,9 +16,9 @@ app.get('/show/:index', (req, res) => {
     res.render('show', { hotGirl: arrHotGirl[index], index });
 });
 
-app.post('/admin/add', parser, (req, res) => {
-    const { name, image, age } = req.body;
-    const hotGirl = new HotGirl(name, age, image);
+app.post('/admin/add', upload.single('hinhHotGirl'), (req, res) => {
+    const { name, age } = req.body;
+    const hotGirl = new HotGirl(name, age, req.file.filename);
     arrHotGirl.push(hotGirl);
     res.send('Them thanh cong!!!');
 });

@@ -6,12 +6,12 @@
     </head>
     <body>
         <h3>Admin page</h3>
-        <form action="/admin/add" method="POST" >
+        <form action="/admin/add" method="POST" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Enter name">
             <br><br>
-            <input type="text" name="image" placeholder="Enter image">
-            <br><br>
             <input type="text" name="age" placeholder="Enter age">
+            <br><br>
+            <input type="file" name="hinhHotGirl" placeholder="Enter image">
             <br><br>
             <button>Add</button>
         </form>
