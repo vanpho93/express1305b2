@@ -47,7 +47,30 @@ function getGirlById(id, cb) {
     });
 }
 
-module.exports = { getAllGirls, getGirlById };
+function getNextGirl(id, cb) {
+    const sql = 'SELECT * FROM "HotGirl" WHERE id > ' + id + ' LIMIT 1';
+    queryDB(sql, (err, result) => {
+        if (err) return cb(err);
+        if (!result.rows[0]) return getNextGirl(0, cb);
+        cb(null, result.rows[0]);
+    });
+}
+
+function getBackGirl(id, cb) {
+    const sql = 'SELECT * FROM "HotGirl" WHERE id < ' + id + ' ORDER BY id DESC LIMIT 1 ';
+    queryDB(sql, (err, result) => {
+        if (err) return cb(err);
+        if (!result.rows[0]) return getBackGirl(1000000, cb);
+        cb(null, result.rows[0]);
+    });
+}
+
+function addNewGirl(name, image, age, cb) {
+    const sql = `INSERT INTO "HotGirl"(image, name, age) VALUES ('${image}', '${name}', ${age})`;
+    queryDB(sql, (err, result) => cb(err));
+}
+
+module.exports = { getAllGirls, getGirlById, getNextGirl, getBackGirl, addNewGirl };
 
 // getAllGirls((err, girls) => console.log(girls));
 

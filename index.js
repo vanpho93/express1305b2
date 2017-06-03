@@ -1,7 +1,7 @@
 const express = require('express');
 // const parser = require('body-parser').urlencoded({ extended: false });
 const upload = require('./uploadConfig');
-const { getAllGirls, getGirlById } = require('./db');
+const { getAllGirls, getGirlById, getNextGirl, getBackGirl, addNewGirl } = require('./db');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -21,15 +21,32 @@ app.get('/show/:id', (req, res) => {
     const { id } = req.params;
     getGirlById(id, (err, girl) => {
         if (err) return res.send(err.toString());
-        res.render('show', { hotGirl: girl, index: id });
+        res.render('show', { hotGirl: girl });
+    });
+});
+
+app.get('/next/:id', (req, res) => {
+    const { id } = req.params;
+    getNextGirl(id, (err, girl) => {
+        if (err) return res.send(err.toString());
+        res.render('show', { hotGirl: girl });
+    });
+});
+
+app.get('/back/:id', (req, res) => {
+    const { id } = req.params;
+    getBackGirl(id, (err, girl) => {
+        if (err) return res.send(err.toString());
+        res.render('show', { hotGirl: girl });
     });
 });
 
 app.post('/admin/add', upload.single('hinhHotGirl'), (req, res) => {
     const { name, age } = req.body;
-    const hotGirl = new HotGirl(name, age, req.file.filename);
-    arrHotGirl.push(hotGirl);
-    res.send('Them thanh cong!!!');
+    addNewGirl(name, req.file.filename, age, err => {
+        if (err) return res.send(err.toString());
+        res.redirect('/');
+    }); 
 });
 
 app.use((err, req, res, next) => {

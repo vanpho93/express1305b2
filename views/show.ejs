@@ -10,8 +10,9 @@
         <br><br>
         <img src="../images/<%= hotGirl.image %>"/>
         <br /><br />
-        <a href="/show/<%= +index - 1 %>">Back</a>
-        <a href="/show/<%= +index + 1 %>">Next</a>
+        <a href="/back/<%= hotGirl.id %>">Back</a>
+        <a href="/next/<%= hotGirl.id %>">Next</a>
+        <%= hotGirl.id  %>
         <%- include('partials/footer.ejs')  %>
     </body>
 </html>
