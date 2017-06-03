@@ -5,15 +5,15 @@
         <meta charset="UTF-8">
     </head>
     <body>
-
-        <% if (isAdmin) { %>
-            <div>
-                <h3>Bang dieu khien</h3>
-            </div>
-        <% } else { %>
-            <div>
-                <h3>Chi admin moi duoc su dung tinh nang nay</h3>
-            </div>
-        <% } %>
+        <h3>Admin page</h3>
+        <form action="/admin/add" method="POST" >
+            <input type="text" name="name" placeholder="Enter name">
+            <br><br>
+            <input type="text" name="image" placeholder="Enter image">
+            <br><br>
+            <input type="text" name="age" placeholder="Enter age">
+            <br><br>
+            <button>Add</button>
+        </form>
     </body>
 </html>
