@@ -23,6 +23,10 @@ app.post('/admin/add', upload.single('hinhHotGirl'), (req, res) => {
     res.send('Them thanh cong!!!');
 });
 
+app.use((err, req, res, next) => {
+    res.send(err.toString());
+});
+
 app.listen(process.env.PORT || 3000);
 
 class HotGirl {
