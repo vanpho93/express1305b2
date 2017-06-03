@@ -1,7 +1,7 @@
 const express = require('express');
 // const parser = require('body-parser').urlencoded({ extended: false });
 const upload = require('./uploadConfig');
-const { getAllGirls } = require('./db');
+const { getAllGirls, getGirlById } = require('./db');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -17,9 +17,11 @@ app.get('/', (req, res) => {
 
 app.get('/admin', (req, res) => res.render('admin'));
 
-app.get('/show/:index', (req, res) => {
-    const { index } = req.params;
-    res.render('show', { hotGirl: arrHotGirl[index], index });
+app.get('/show/:id', (req, res) => {
+    const { id } = req.params;
+    getGirlById(id, (err, girl) => {
+        res.render('show', { hotGirl: girl, index: id });
+    });
 });
 
 app.post('/admin/add', upload.single('hinhHotGirl'), (req, res) => {

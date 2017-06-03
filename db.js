@@ -38,7 +38,15 @@ function getAllGirls(cb) {
     });
 }
 
-module.exports = { getAllGirls };
+function getGirlById(id, cb) {
+    const sql = 'SELECT * FROM "HotGirl" WHERE id = ' + id;
+    queryDB(sql, (err, result) => {
+        if (err) return cb(err);
+        cb(null, result.rows[0]);
+    });
+}
+
+module.exports = { getAllGirls, getGirlById };
 
 // getAllGirls((err, girls) => console.log(girls));
 
