@@ -25,10 +25,22 @@ function queryDB(sql, cb) {
         client.query(sql, (errQuery, result) => {
             if (errQuery) return cb(errQuery);
             done(errQuery);
-            cb(null, result.rows);
+            cb(null, result);
         });
     });
 }
+
+function getAllGirls(cb) {
+    const sql = 'SELECT * FROM "HotGirl"';
+    queryDB(sql, (err, result) => {
+        if (err) return cb(err);
+        cb(null, result.rows);
+    });
+}
+
+module.exports = { getAllGirls };
+
+// getAllGirls((err, girls) => console.log(girls));
 
 // queryDB('SELECT * FROM "HotGirl"', function(e, r) {
 //     if (e) return console.log(e + '');
@@ -50,4 +62,4 @@ function queryDB(sql, cb) {
 // queryDB('SELECT * FROM "HotGirl"', onSuccess);
 
 // queryDB('SELECT * FROM "HotGirl"', arrowSuccess);
-module.exports = queryDB;
+

@@ -1,7 +1,7 @@
 const express = require('express');
 // const parser = require('body-parser').urlencoded({ extended: false });
 const upload = require('./uploadConfig');
-const queryDB = require('./db');
+const { getAllGirls } = require('./db');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -9,7 +9,7 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    queryDB('SELECT * FROM "HotGirl"', (err, girls) => {
+    getAllGirls((err, girls) => {
         if (err) return res.send(err.toString());
         res.render('home', { mang: girls });
     });
